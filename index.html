@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>System Terminal</title>
+<style>
+body {
+    background: #000;
+    color: #00ff41;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 18px;
+    margin: 0;
+    padding: 30px;
+}
+#terminal {
+    white-space: pre-wrap;
+}
+input {
+    background: black;
+    color: #00ff41;
+    border: none;
+    outline: none;
+    font: inherit;
+    width: 70%;
+}
+</style>
+</head>
+
+<body>
+
+<div id="terminal"></div>
+<input id="input" style="display:none;" autocomplete="off">
+
+<script>
+const t = document.getElementById("terminal");
+const input = document.getElementById("input");
+
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+async function type(text, speed=30) {
+    for (const char of text) {
+        t.textContent += char;
+        await sleep(speed);
+    }
+    t.textContent += "\n";
+    window.scrollTo(0, document.body.scrollHeight);
+}
+
+async function start() {
+    await type("SYSTEM TERMINAL v4.7", 50);
+    await type("---------------------------------------", 15);
+    await sleep(500);
+
+    await type("[+] Establishing remote connection...");
+    await sleep(700);
+
+    await type("[+] Searching for device...");
+    await sleep(900);
+
+    await type("[+] DEVICE FOUND");
+    await sleep(500);
+
+    await type("[+] Opening secure connection...");
+    await sleep(800);
+
+    t.textContent += "\nLOADING [";
+
+    for(let i=0; i<25; i++) {
+        t.textContent += "█";
+        await sleep(70);
+    }
+
+    t.textContent += "] 100%\n\n";
+
+    await sleep(600);
+
+    await type("CONNECTION ESTABLISHED.");
+    await sleep(700);
+
+    await type("\nWHO IS USING THIS DEVICE?");
+    t.textContent += "> ";
+
+    input.style.display = "inline";
+    input.focus();
+}
+
+input.addEventListener("keydown", async function(e) {
+
+    if(e.key !== "Enter") return;
+
+    const name = input.value.trim();
+
+    t.textContent += name + "\n";
+    input.style.display = "none";
+
+    if(name.toLowerCase() !== "ivy") {
+
+        await type("\n[!] IDENTITY MISMATCH");
+        await sleep(700);
+
+        await type("[!] ACCESS DENIED");
+        await sleep(700);
+
+        await type("\nYou're not Ivy >:(");
+
+        return;
+    }
+
+    await type("\n[+] Searching identity database...");
+    await sleep(700);
+
+    await type("[+] MATCH FOUND");
+    await sleep(500);
+
+    await type("[+] USER: IVY");
+    await sleep(600);
+
+    await type("[+] LOCATION: SUU");
+    await sleep(600);
+
+    await type("[+] Identity verified.");
+    await sleep(800);
+
+    await type("\nACCESS GRANTED");
+    await sleep(1200);
+
+    await type("\nINITIALIZING SYSTEM OVERRIDE...");
+    await sleep(700);
+
+    // Fake crazy code
+    for(let i=0; i<22; i++) {
+
+        let code = "";
+
+        for(let j=0; j<65; j++) {
+            code += String.fromCharCode(
+                33 + Math.floor(Math.random()*90)
+            );
+        }
+
+        t.textContent += code + "\n";
+
+        window.scrollTo(0, document.body.scrollHeight);
+
+        await sleep(40);
+    }
+
+    await sleep(1000);
+
+    t.textContent = "";
+
+    await type("=======================================", 20);
+    await type("        SYSTEM OVERRIDE COMPLETE", 50);
+    await type("=======================================", 20);
+
+    await sleep(1500);
+
+    await type("\nIVY...");
+    await sleep(1800);
+
+    await type("\nYOU'VE BEEN HACKED.", 80);
+
+    await sleep(2500);
+
+    await type("\n\njk 😂", 100);
+
+    await sleep(1000);
+
+    await type("\nHI IVY :)", 100);
+
+    await sleep(700);
+
+    await type("\nSpencer was here <3", 80);
+
+    await sleep(500);
+
+    t.textContent += "\n\n";
+
+    // Celebration
+    for(let i=0; i<8; i++) {
+        t.textContent += "★  *  +  <3  ★  +  *  <3  ★\n";
+        await sleep(100);
+    }
+});
+
+start();
+</script>
+
+</body>
+</html>
